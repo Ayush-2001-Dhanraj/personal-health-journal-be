@@ -1,7 +1,7 @@
 const Groups = require("./groups.mongo");
 
 async function getAllGroups() {
-  return await Groups.find({}, { _id: 0, __v: 0 });
+  return await Groups.find({}, { __v: 0 });
 }
 
 async function addNewGroup(name) {
@@ -13,7 +13,7 @@ async function addNewGroup(name) {
 }
 
 async function getGroup(id) {
-  return await Groups.findOne({ _id: id }, { _id: 0, __v: 0 });
+  return await Groups.findOne({ _id: id }, { __v: 0 });
 }
 
 module.exports = {
