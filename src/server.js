@@ -3,6 +3,10 @@ require("dotenv").config();
 
 const { connectMongo } = require("./services/mongo");
 
+const config = {
+  clerkSecretKey: process.env.CLERK_SECRET_KEY,
+};
+
 const app = require("./app");
 
 const server = http.createServer(app);

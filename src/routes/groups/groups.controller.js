@@ -6,6 +6,7 @@ const {
 const ObjectId = require("mongoose").Types.ObjectId;
 
 async function httpGetAllGroups(req, res) {
+  console.log("REQUEST AUTH: ", req.auth);
   return res.status(200).json(await getAllGroups());
 }
 
