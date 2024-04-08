@@ -1,11 +1,11 @@
 const Users = require("./user.mongo");
 
 async function getUser(email) {
-  return await Users.find({ email }, { __v: 0 });
+  return await Users.findOne({ email }, { __v: 0 });
 }
 
 async function getUserByID(id) {
-  return await Users.find({ _id: id }, { __v: 0 });
+  return await Users.findOne({ _id: id }, { __v: 0 });
 }
 
 async function addUser(user) {
