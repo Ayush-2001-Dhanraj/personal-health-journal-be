@@ -4,9 +4,17 @@ const {
   getGroup,
 } = require("../../models/groups/groups.model");
 const ObjectId = require("mongoose").Types.ObjectId;
+const clerkClient = require("@clerk/clerk-sdk-node");
 
 async function httpGetAllGroups(req, res) {
-  console.log("REQUEST AUTH: ", req.auth);
+  const { userId, sessionId } = req.auth;
+
+  console.log({ userId, sessionId });
+
+  if (userId) {
+    const user = await clerkClient.users.getUser(req.auth.userId);
+    console.log(user);
+  }
   return res.status(200).json(await getAllGroups());
 }
 
