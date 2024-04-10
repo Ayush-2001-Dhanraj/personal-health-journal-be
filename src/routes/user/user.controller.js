@@ -12,7 +12,7 @@ async function httpGetUser(req, res) {
 
   const user = await getUser(email);
 
-  if (user.length) {
+  if (user) {
     return res.status(200).json(user);
   }
 
