@@ -1,7 +1,9 @@
 const Entries = require("./entries.mongo");
 
 async function getAllEntries(userID) {
-  return await Entries.find({ user: userID }, { __v: 0 });
+  return await Entries.find({ user: userID }, { __v: 0 }).sort({
+    eventDate: "desc",
+  });
 }
 
 async function getEntry(_id) {
