@@ -3,6 +3,7 @@ const {
   getUserByID,
   addUser,
   updateName,
+  updateProfileImage,
 } = require("../../models/user/user.model");
 const clerkClient = require("@clerk/clerk-sdk-node");
 
@@ -49,4 +50,20 @@ async function httpUpdateName(req, res) {
   return res.status(200).json(updatedUser);
 }
 
-module.exports = { httpGetUser, httpUpdateName };
+async function httpUpdateProfileImg(req, res) {
+  const { id } = req.params;
+
+  const user = await getUserByID(id);
+
+  if (!user) return res.status(404).json({ err: "User not found" });
+
+  const { avatar } = req.body;
+
+  if (!avatar) return res.status(404).json({ err: "Missing avatar property" });
+
+  const updatedUser = await updateProfileImage(id, avatar);
+
+  return res.status(200).json(updatedUser);
+}
+
+module.exports = { httpGetUser, httpUpdateName, httpUpdateProfileImg };

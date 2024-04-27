@@ -29,7 +29,13 @@ async function updateLastUpdateDate(_id, lastUpdateDate) {
   );
 }
 
-async function updateProfileImage() {}
+async function updateProfileImage(id, profileImg) {
+  return await Users.findOneAndUpdate(
+    { _id: id },
+    { $set: { profileImg, lastUpdate: Date.now() } },
+    { new: true }
+  );
+}
 
 module.exports = {
   getUser,
