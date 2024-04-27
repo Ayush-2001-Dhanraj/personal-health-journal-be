@@ -8,9 +8,9 @@ const {
 
 const entriesRouter = require("express").Router();
 
-entriesRouter.route("/").get(httpGetAllEntries).post(httpCreateEntry);
+entriesRouter.route("/:userID").get(httpGetAllEntries).post(httpCreateEntry);
 entriesRouter
-  .route("/:id")
+  .route("/entry/:entryID")
   .get(httpGetEntry)
   .delete(httpDeleteEntry)
   .patch(httpUpdateEntry);

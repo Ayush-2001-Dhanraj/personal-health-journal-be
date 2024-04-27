@@ -25,9 +25,9 @@ const entriesSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  files: {
-    type: Array,
-    default: [],
+  file: {
+    type: String,
+    default: "",
     required: false,
   },
   groups: {
@@ -36,6 +36,11 @@ const entriesSchema = new mongoose.Schema({
     ],
     default: [],
     required: false,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
 });
 
