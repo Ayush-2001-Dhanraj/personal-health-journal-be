@@ -6,6 +6,7 @@ const {
   updateProfileImage,
 } = require("../../models/user/user.model");
 const clerkClient = require("@clerk/clerk-sdk-node");
+const { upload } = require("../../util/cloudinary");
 
 async function httpGetUser(req, res) {
   // check if user already exists
@@ -57,11 +58,15 @@ async function httpUpdateProfileImg(req, res) {
 
   if (!user) return res.status(404).json({ err: "User not found" });
 
-  const { avatar } = req.body;
+  const avatar = req.files?.avatar;
 
-  if (!avatar) return res.status(404).json({ err: "Missing avatar property" });
+  if (!avatar) return res.status(404).json({ err: "Missing avatar" });
 
-  const updatedUser = await updateProfileImage(id, avatar);
+  const result = await upload(avatar.tempFilePath);
+
+  if (!result) return res.status(404).json({ err: "File could't be uploaded" });
+
+  const updatedUser = await updateProfileImage(id, result.url);
 
   return res.status(200).json(updatedUser);
 }
