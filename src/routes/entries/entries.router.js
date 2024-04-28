@@ -4,6 +4,7 @@ const {
   httpCreateEntry,
   httpDeleteEntry,
   httpUpdateEntry,
+  httpGetAttachment,
 } = require("./entries.controller");
 
 const entriesRouter = require("express").Router();
@@ -14,5 +15,6 @@ entriesRouter
   .get(httpGetEntry)
   .delete(httpDeleteEntry)
   .patch(httpUpdateEntry);
+entriesRouter.route("/entry/attachment/:entryID").get(httpGetAttachment);
 
 module.exports = entriesRouter;

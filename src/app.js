@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-// app.use("/v1", ClerkExpressRequireAuth(), apiV1);
-app.use("/v1", apiV1);
+app.use("/v1", ClerkExpressRequireAuth({}), apiV1);
+// app.use("/v1", apiV1);
 
 module.exports = app;

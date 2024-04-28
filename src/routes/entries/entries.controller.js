@@ -4,6 +4,7 @@ const {
   createEntry,
   deleteEntry,
   updateEntry,
+  getAttachment,
 } = require("../../models/entries/entries.model");
 const { getUserByID } = require("../../models/user/user.model");
 const isValidDate = require("../../util/isValidDate");
@@ -89,10 +90,22 @@ async function httpUpdateEntry(req, res) {
   return res.status(200).json(updatedDocument);
 }
 
+async function httpGetAttachment(req, res) {
+  const { entryID } = req.params;
+
+  const attachment = await getAttachment(entryID);
+
+  if (!attachment)
+    return res.status(400).json({ err: `No entry found with ID ${entryID}` });
+
+  return res.status(200).json(attachment);
+}
+
 module.exports = {
   httpGetAllEntries,
   httpGetEntry,
   httpCreateEntry,
   httpDeleteEntry,
   httpUpdateEntry,
+  httpGetAttachment,
 };

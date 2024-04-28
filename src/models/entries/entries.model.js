@@ -27,10 +27,15 @@ async function updateEntry(_id, data) {
   return await Entries.findOneAndUpdate({ _id }, data, { new: true });
 }
 
+async function getAttachment(id) {
+  return await Entries.findOne({ _id: id }, { file: 1 });
+}
+
 module.exports = {
   getAllEntries,
   getEntry,
   createEntry,
   deleteEntry,
   updateEntry,
+  getAttachment,
 };
