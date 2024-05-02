@@ -16,6 +16,11 @@ app.use(cors());
 app.use(express.json());
 
 // routes
+app.get("/", (req, res) => {
+  return res
+    .status(200)
+    .json({ msg: "Welcome to Personal Health Journal Backend" });
+});
 app.use("/v1", ClerkExpressRequireAuth({}), apiV1);
 // app.use("/v1", apiV1);
 
