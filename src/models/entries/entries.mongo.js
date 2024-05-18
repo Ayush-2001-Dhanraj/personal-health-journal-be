@@ -7,8 +7,7 @@ const entriesSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["GEN", "RES"],
-    default: "GEN",
+    enum: ["TES", "GEN", "VIS"],
     required: false,
   },
   subtitle: {
