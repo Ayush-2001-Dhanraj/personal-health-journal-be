@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
     .status(200)
     .json({ msg: "Welcome to Personal Health Journal Backend" });
 });
-app.use("/v1", ClerkExpressRequireAuth({}), apiV1);
-// app.use("/v1", apiV1);
+// app.use("/v1", ClerkExpressRequireAuth({}), apiV1);
+app.use("/v1", apiV1);
 
 module.exports = app;

@@ -15,7 +15,7 @@ async function createEntry(entry) {
     const newEntry = new Entries(entry);
     return await newEntry.save();
   } catch (error) {
-    console.log(error);
+    return { err: error.message };
   }
 }
 
@@ -24,7 +24,14 @@ async function deleteEntry(_id) {
 }
 
 async function updateEntry(_id, data) {
-  return await Entries.findOneAndUpdate({ _id }, data, { new: true });
+  try {
+    return await Entries.findOneAndUpdate({ _id }, data, {
+      new: true,
+      runValidators: true,
+    });
+  } catch (error) {
+    return { err: error.message };
+  }
 }
 
 async function getAttachment(id) {

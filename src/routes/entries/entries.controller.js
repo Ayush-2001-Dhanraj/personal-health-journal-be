@@ -33,7 +33,22 @@ async function httpCreateEntry(req, res) {
   if (!user)
     return res.status(400).json({ err: `No user found with email ${userID}` });
 
-  const { title, type, subtitle, description, eventDate, groups } = req.body;
+  const {
+    title,
+    type,
+    subtitle,
+    description,
+    eventDate,
+    groups,
+    hospitalName,
+    doctorName,
+    department,
+    isRecurring,
+    repeatFrequency,
+    recurringStartDate,
+    isTestAwaited,
+    testResultDate,
+  } = req.body;
 
   if (!title || !eventDate)
     return res
@@ -42,6 +57,11 @@ async function httpCreateEntry(req, res) {
 
   if (!isValidDate(eventDate))
     return res.status(400).json({ err: `Invalid Date ${eventDate}` });
+
+  if (isRecurring && (!recurringStartDate || !repeatFrequency))
+    return res.status(400).json({
+      err: "For Recurring Events Frequency and start date is required",
+    });
 
   const attachment = req.files?.attachment;
 
@@ -61,7 +81,17 @@ async function httpCreateEntry(req, res) {
     file,
     groups,
     user: user._id,
+    hospitalName,
+    doctorName,
+    department,
+    isRecurring: !!isRecurring,
+    repeatFrequency,
+    recurringStartDate,
+    isTestAwaited,
+    testResultDate,
   });
+
+  if (resp.err) return res.status(400).json(resp);
 
   return res.status(201).json(resp);
 }

@@ -15,6 +15,21 @@ const entriesSchema = new mongoose.Schema({
     default: "",
     required: false,
   },
+  hospitalName: {
+    type: String,
+    default: "",
+    required: false,
+  },
+  doctorName: {
+    type: String,
+    default: "",
+    required: false,
+  },
+  department: {
+    type: String,
+    default: "",
+    required: false,
+  },
   description: {
     type: String,
     default: "",
@@ -24,6 +39,17 @@ const entriesSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  isRecurring: {
+    type: Boolean,
+    default: false,
+  },
+  repeatFrequency: {
+    type: String,
+    enum: ["DAILY", "WEEKLY", "MONTHLY"],
+  },
+  recurringStartDate: { type: Date },
+  isTestAwaited: { type: Boolean, default: false },
+  testResultDate: { type: Date },
   file: {
     type: String,
     default: "",
