@@ -1,1 +1,1 @@
-# Personal Health Journal - BE
+# PurePath Journal - BE
